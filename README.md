@@ -17,7 +17,6 @@ Meant to make use of the TNS web service that I made, tns-twitter-bot (ttb) will
         - If entry is new news, tweet about it
             - Tweets a message with the url to the news story
             - Waits a specific amount of time (5 mins currently) before continuing in loop. This is to avoid spamming tweets all at once.
-    3. Frees cached news stories from memory
      
-### Deployment
-(Coming soon)
+### Usage
+Simply visit the Twitter page [here](https://twitter.com/thetnsbot).
