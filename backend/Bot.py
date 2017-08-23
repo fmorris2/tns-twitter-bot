@@ -6,7 +6,7 @@ from time import sleep
 class Bot:
     CYCLE_TIME = 60 * 30 #30 minutes between TNS consumptions
     INTERVAL_BETWEEN_STORY_TWEETS = 60 * 10 #10 minutes between news story tweets
-    TNS_URL = 'http://tns.vikingsoftware.org:5000/news/USA'
+    TNS_URL = 'http://tns.vikingsoftware.org:5000/news/Syracuse'
     KEY_FILE_PATH = '/data/keys'
 
     """
