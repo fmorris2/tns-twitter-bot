@@ -75,9 +75,10 @@ class Bot:
     """
     def parse_json_into_list(self, json):
         news_story_list = []
-        entries = json['newsEntries']
-        for entry in entries:
-            news_story_list.append(NewsStory.NewsStory(entry[0], entry[1], entry[3]))
+        if 'newsEntries' in json:
+            entries = json['newsEntries']
+            for entry in entries:
+                news_story_list.append(NewsStory.NewsStory(entry[0], entry[1], entry[3]))
         return news_story_list
 
     """
@@ -98,9 +99,9 @@ class Bot:
         print 'Tweeting story for topic: ' + story.trending_topic
         self.already_tweeted_topics.append(story.trending_topic)
         self.tweepy_api.update_status(
-            'Trending Topic: ' + story.trending_topic + '\n' \
+            'Trending Topic: ' + story.trending_topic.encode('utf-8') + '\n' \
             + 'Tweet Volume: ' + ('N/A' if story.tweet_volume is None else str(story.tweet_volume)) + '\n' \
-            + story.news_story_link
+            + story.news_story_link.encode('utf-8')
         )
 
 
