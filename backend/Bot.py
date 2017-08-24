@@ -55,8 +55,8 @@ class Bot:
     """
     def handle_tweet_process_for_story(self, story):
         if(story.trending_topic not in self.already_tweeted_topics):
-            self.tweet_story(story)
-            sleep(Bot.INTERVAL_BETWEEN_STORY_TWEETS)
+            if self.tweet_story(story):
+                sleep(Bot.INTERVAL_BETWEEN_STORY_TWEETS)
 
     """
     Consumes the TNS web service
@@ -98,11 +98,15 @@ class Bot:
     def tweet_story(self, story):
         print 'Tweeting story for topic: ' + story.trending_topic
         self.already_tweeted_topics.append(story.trending_topic)
-        self.tweepy_api.update_status(
-            'Trending Topic: ' + story.trending_topic.encode('utf-8') + '\n' \
-            + 'Tweet Volume: ' + ('N/A' if story.tweet_volume is None else str(story.tweet_volume)) + '\n' \
-            + story.news_story_link.encode('utf-8')
-        )
+        try:
+            self.tweepy_api.update_status(
+                'Trending Topic: ' + story.trending_topic.encode('utf-8') + '\n' \
+                + 'Tweet Volume: ' + ('N/A' if story.tweet_volume is None else str(story.tweet_volume)) + '\n' \
+                + story.news_story_link.encode('utf-8')
+            )
+        except tweepy.TweepError:
+            return False
+        return True
 
 
     """
