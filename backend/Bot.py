@@ -100,9 +100,9 @@ class Bot:
         self.already_tweeted_topics.append(story.trending_topic)
         try:
             self.tweepy_api.update_status(
-                'Trending Topic: ' + story.trending_topic.encode('utf-8') + '\n' \
+                'Trending Topic: ' + story.trending_topic + '\n' \
                 + 'Tweet Volume: ' + ('N/A' if story.tweet_volume is None else str(story.tweet_volume)) + '\n' \
-                + story.news_story_link.encode('utf-8')
+                + story.news_story_link
             )
         except tweepy.TweepError:
             return False
