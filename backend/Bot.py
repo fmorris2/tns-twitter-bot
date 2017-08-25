@@ -96,15 +96,15 @@ class Bot:
     and sends out a tweet for it
     """
     def tweet_story(self, story):
-        print 'Tweeting story for topic: ' + story.trending_topic
-        self.already_tweeted_topics.append(story.trending_topic)
         try:
+            print 'Tweeting story for topic: ' + story.trending_topic
+            self.already_tweeted_topics.append(story.trending_topic)
             self.tweepy_api.update_status(
                 'Trending Topic: ' + story.trending_topic + '\n' \
                 + 'Tweet Volume: ' + ('N/A' if story.tweet_volume is None else str(story.tweet_volume)) + '\n' \
                 + story.news_story_link
             )
-        except tweepy.TweepError:
+        except tweepy.TweepError or UnicodeEncodeError:
             return False
         return True
 
