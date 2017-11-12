@@ -87,8 +87,13 @@ class Bot:
     a JSON object
     """
     def gather_json_from_tns(self):
-        response = urllib.urlopen(Bot.TNS_URL)
-        data = json.load(response)
+        data = []
+        try:
+            response = urllib.urlopen(Bot.TNS_URL)
+            data = json.load(response)
+        except IOError:
+            print 'IO Error in gather_json'
+
         return data
 
     """
